@@ -1,5 +1,12 @@
 package service
 
+import (
+	"context"
+	"fmt"
+	"net/http"
+	"log"
+)
+
 func Start(ctx context.Context, serviceName, host, port string, 
 	registerHandlersFunc func()) (context.Context, error) {
 
@@ -9,8 +16,7 @@ func Start(ctx context.Context, serviceName, host, port string,
 	return ctx, nil
 }
 
-func startService(ctx context.Context, serviceName, host, port string)
-	context.Context {
+func startService(ctx context.Context, serviceName, host, port string) context.Context {
 
 	ctx, cancel := context.WithCancel(ctx)
 

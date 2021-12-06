@@ -2,8 +2,10 @@ package main
 
 import (
 	"context"
-	"app/log/logservice"
+	"github.com/jayatwork/helper_utils/distributedGO-vanSickel/app/log"
+	"github.com/jayatwork/helper_utils/distributedGO-vanSickel/app/service"
 	stlog "log"
+	"fmt"
 )
 
 func main() {
@@ -16,8 +18,7 @@ func main() {
 		"Log Service",
 		host,
 		port, 
-		log.RegisterHandlers
-	)
+		log.RegisterHandlers)
 
 	if err != nil {
 		stlog.Fatal(err)
