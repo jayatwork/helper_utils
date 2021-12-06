@@ -7,12 +7,14 @@ import (
 	"time"
 )
 
-var ipToScan = "10.12.58.143"
+var ipToScan = "192.168.1.1"
 var minPort = 1
 var maxPort = 1024
 var timeOut = time.Duration(10) * time.Second
 
 func main() {
+
+	// Stage one PORT_SCANNER functionality
 	activeThreads := 0
 	doneChannel := make(chan bool)
 
@@ -25,6 +27,9 @@ func main() {
 		<- doneChannel
 		activeThreads--
 	}
+
+	//Stage two IDENTIFY_SERVICES_AVAIALABLE
+
 }
 
 func testTCPConnection(ip string, port int, doneChannel chan bool) {
