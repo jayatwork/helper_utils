@@ -28,7 +28,7 @@ var reg = registry{registration: make([]Registration, 0),
 
 type RegistryService struct {}
 
-func (s RegistryService) ServerHTTP(w http.ResponseWriter, req *http.Request) {
+func (s RegistryService) ServeHTTP(w http.ResponseWriter, req *http.Request) {
 	log.Println("Request Received")
 	switch req.Method {
 	case http.MethodPost:

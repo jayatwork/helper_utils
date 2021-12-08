@@ -1,5 +1,12 @@
 package registry
 
+import (
+	"fmt"
+	"encoding/json"
+	"net/http"
+	"bytes"
+
+)
 func RegisterService(r Registration) error {
 	buf := new(bytes.Buffer)
 	enc := json.NewEncoder(buf)
