@@ -1,12 +1,12 @@
 package registry
 
 import (
-	"fmt"
-	"encoding/json"
-	"net/http"
 	"bytes"
-
+	"encoding/json"
+	"fmt"
+	"net/http"
 )
+
 func RegisterService(r Registration) error {
 	buf := new(bytes.Buffer)
 	enc := json.NewEncoder(buf)
@@ -20,7 +20,7 @@ func RegisterService(r Registration) error {
 		return err
 	}
 	if res.StatusCode != http.StatusOK {
-		return fmt.Errorf("Failed to register service. Registry service responded with a code %v", res.StatusCode)
+		return fmt.Errorf("failed to register service- registry service responded with a code %v", res.StatusCode)
 	}
 	return nil
 }

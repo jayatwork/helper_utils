@@ -2,11 +2,12 @@ package main
 
 import (
 	"context"
-	"github.com/jayatwork/helper_utils/distributedGO-vanSickel/app/log"
-	"github.com/jayatwork/helper_utils/distributedGO-vanSickel/app/service"
-	"github.com/jayatwork/helper_utils/distributedGO-vanSickel/app/registry"
-	stlog "log"
 	"fmt"
+	stlog "log"
+
+	"github.com/jayatwork/helper_utils/distributedGO-vanSickel/app/log"
+	"github.com/jayatwork/helper_utils/distributedGO-vanSickel/app/registry"
+	"github.com/jayatwork/helper_utils/distributedGO-vanSickel/app/service"
 )
 
 func main() {
@@ -20,11 +21,10 @@ func main() {
 	r.ServiceURL = serviceAddress
 
 	ctx, err := service.Start(
-		context.Background(), 
-		"Log Service",
+		context.Background(),
+		r,
 		host,
 		port,
-		r, 
 		log.RegisterHandlers,
 	)
 

@@ -3,18 +3,19 @@ package service
 import (
 	"context"
 	"fmt"
-	"net/http"
 	"log"
+	"net/http"
+
+	"github.com/jayatwork/helper_utils/distributedGO-vanSickel/app/registry"
 )
 
-func Start(ctx context.Context, host, port string, reg registry.Registration,
+func Start(ctx context.Context, reg registry.Registration, host, port string,
 	registerHandlersFunc func()) (context.Context, error) {
 
 	registerHandlersFunc()
 	ctx = startService(ctx, reg.ServiceName, host, port)
 	err := registry.RegisterService(reg)
-	if err != nil
-	{
+	if err != nil {
 		return ctx, err
 	}
 	return ctx, nil

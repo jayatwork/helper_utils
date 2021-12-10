@@ -1,18 +1,20 @@
 package main
 
 import (
-	"github.com/jayatwork/helper_utils/distributedGO-vanSickel/app/registry"
 	"context"
 	"fmt"
 	"log"
 	"net/http"
+
+	"github.com/jayatwork/helper_utils/distributedGO-vanSickel/app/registry"
 )
 
 func main() {
 
 	http.Handle("/services", &registry.RegistryService{})
 
-	ctx, cancel := context.Cancel(context.Background())
+	ctx, cancel := context.WithCancel(context.Background())
+	//ctx, cancel := context.WithDeadline(context.Background(), time.Now())
 	defer cancel()
 	var srv http.Server
 	srv.Addr = registry.ServerPort
@@ -29,6 +31,6 @@ func main() {
 		srv.Shutdown(ctx)
 	}()
 
-	<-ctx.Done
+	<-ctx.Done()
 	fmt.Println("Shutting down the registry service")
 }
