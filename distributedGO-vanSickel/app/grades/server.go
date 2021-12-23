@@ -60,6 +60,38 @@ func (sh studentHandler) getAll(w http.ResponseWriter, r *http.Request) {
 	w.Write(data)
 }
 
+func (sh studentsHandler) addGrade(w http.ResponseWriter, r *http.Request, id int) {
+	studentsMutex.Lock()
+	defer studentsMutex.Unlock()
+
+	student, err := students.GetById(id)
+	if err != nil {
+		w.WriteHeader(http.StatusNotFound)
+		log.Println(err)
+		return
+	}
+
+	var g Grade
+	dec  := json.NewEncoder(r.Body)
+	err  := enc.Encode(&g)
+	if err != nil {
+		w.WriteHeader(http.StatusBadRequest)
+		log.Println(err)
+		return 
+	}
+	student.Grades = append(student.Grades, g)
+
+	w.WriteHeader(http.StatusCreated)
+	data, err := sh.toJSON(g)
+	if err != nil {
+		log.Println(err)
+		return
+	}
+	w.Header().Add("Content-Type", "application/json")
+	w.Write(data)
+}
+
+
 func (sh studentsHandler) getOne(w http.ResponseWriter, r *http.Request, id int) {
 	studentsMutex.Lock()
 	defer studentsMutex.Unlock()
