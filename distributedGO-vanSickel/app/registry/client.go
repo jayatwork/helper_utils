@@ -24,3 +24,13 @@ func RegisterService(r Registration) error {
 	}
 	return nil
 }
+
+func ShutdownService(serviceURL string) error {
+	req, err := http.NewRequest(http.MethodDelete,
+		ServicesURL,
+		bytes.NewBuffer([]byte(serviceURL)))
+	if err != nil {
+		return err
+	}
+	)
+}
